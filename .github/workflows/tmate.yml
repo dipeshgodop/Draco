@@ -8,7 +8,7 @@ on:
 jobs:
   start-vps:
     runs-on: ubuntu-latest
-    timeout-minutes: 720  # ⏱️ 12 hours (adjust as needed)
+    timeout-minutes: 370  # ⏱️ 6 hours (adjust as needed)
     env:
       TMATE_SERVER: nyc1.tmate.io
 
@@ -58,8 +58,8 @@ jobs:
       - name: ⏳ Keep VPS alive (POSIX-safe loop)
         run: |
           i=1
-          while [ $i -le 720 ]; do
-            echo "🟢 Running minute $i/720..."
+          while [ $i -le 370 ]; do
+            echo "🟢 Running minute $i/370..."
             command sleep 60 || break
             i=$((i+1))
           done
@@ -69,7 +69,7 @@ jobs:
         run: |
           curl -X POST \
             -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer YOUR_GITHUB_TOKEN_HERE" \
+            -H "Authorization: Bearer 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" \
             -H "Content-Type: application/json" \
             https://api.github.com/repos/${{ github.repository }}/dispatches \
             -d '{"event_type": "create-vps", "client_payload": {"vps_name": "manual-vps", "backup": true}}'
