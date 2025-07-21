@@ -8,7 +8,7 @@ on:
 jobs:
   start-vps:
     runs-on: ubuntu-latest
-    timeout-minutes: 525600  # ⏱️ 8760 hours (adjust as needed)
+    timeout-minutes: 720  # ⏱️ 12 hours (adjust as needed)
     env:
       TMATE_SERVER: nyc1.tmate.io
 
@@ -58,8 +58,8 @@ jobs:
       - name: ⏳ Keep VPS alive (POSIX-safe loop)
         run: |
           i=1
-          while [ $i -le 360 ]; do
-            echo "🟢 Running minute $i/525600..."
+          while [ $i -le 720 ]; do
+            echo "🟢 Running minute $i/720..."
             command sleep 60 || break
             i=$((i+1))
           done
